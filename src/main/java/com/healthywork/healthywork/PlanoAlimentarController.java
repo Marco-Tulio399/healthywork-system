@@ -45,6 +45,25 @@ public class PlanoAlimentarController {
                 .toList();
     }
 
+    @PutMapping("/{idPlano}")
+    public PlanoAlimentarResponse atualizar(
+            @PathVariable Long idPlano,
+            @Valid @RequestBody PlanoAlimentarRequest request) {
+
+        PlanoAlimentar plano = planoService.atualizar(
+                idPlano,
+                request.orcamento(),
+                request.objetivo()
+        );
+
+        return converterParaResponse(plano);
+    }
+
+    @DeleteMapping("/{idPlano}")
+    public void excluir(@PathVariable Long idPlano) {
+        planoService.excluir(idPlano);
+    }
+
     private PlanoAlimentarResponse converterParaResponse(
             PlanoAlimentar plano) {
 

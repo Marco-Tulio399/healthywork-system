@@ -11,4 +11,5 @@ public interface RefeicaoAlimentoRepository
         extends JpaRepository<RefeicaoAlimento, RefeicaoAlimentoId> {
 
     List<RefeicaoAlimento> findByRefeicaoIdRefeicao(Long idRefeicao);
+    void deleteByRefeicaoIdRefeicao(Long idRefeicao);
 }

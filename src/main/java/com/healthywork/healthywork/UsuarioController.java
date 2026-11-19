@@ -6,6 +6,7 @@ import com.healthywork.healthywork.dto.LoginRequest;
 import com.healthywork.healthywork.dto.UsuarioResponse;
 import com.healthywork.healthywork.entity.Usuario;
 import com.healthywork.healthywork.service.UsuarioService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import jakarta.validation.Valid;
 
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {

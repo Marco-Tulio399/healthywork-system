@@ -1,0 +1,863 @@
+
+/* ==========================================
+   HEALTHYWORK - PÁGINA DE ALIMENTAÇÃO
+========================================== */
+
+/* ==========================================
+   ESTRUTURA PRINCIPAL
+========================================== */
+
+.pagina-alimentacao {
+    min-height: 100vh;
+    background: #eef4ef;
+    color: #263b30;
+    padding: 0 0 35px;
+}
+
+/* ==========================================
+   CABEÇALHO
+========================================== */
+
+.cabecalho-alimentacao {
+    min-height: 76px;
+    padding: 15px 8%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0eae2;
+}
+
+/* Botão para retornar ao painel */
+.botao-voltar-alimentacao {
+    background: transparent;
+    border: 1px solid #d5e3d8;
+    color: #286642;
+    padding: 10px 17px;
+    border-radius: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-voltar-alimentacao:hover {
+    background: #e8f2ea;
+}
+
+/* Identidade visual da página */
+.identidade-alimentacao {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #205c3a;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    font-size: 16px;
+}
+
+.icone-alimentacao {
+    font-size: 23px;
+}
+
+/* ==========================================
+   DESTAQUE PRINCIPAL
+========================================== */
+
+.destaque-alimentacao {
+    margin: 35px auto;
+    width: 84%;
+    max-width: 1250px;
+    min-height: 235px;
+    padding: 40px 48px;
+    border-radius: 22px;
+    background: linear-gradient(115deg, #17492e, #287a4b);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(25, 79, 47, 0.16);
+}
+
+.subtitulo-alimentacao {
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    color: #b9ddc3;
+}
+
+.destaque-alimentacao h1 {
+    font-size: clamp(27px, 3.5vw, 39px);
+    margin: 15px 0 12px;
+    max-width: 600px;
+}
+
+.destaque-alimentacao p {
+    max-width: 550px;
+    color: #e0eee3;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.decoracao-alimentacao {
+    font-size: 100px;
+    opacity: 0.9;
+    margin-right: 35px;
+}
+
+/* ==========================================
+   CONTEÚDO E SEÇÕES
+========================================== */
+
+.conteudo-alimentacao {
+    width: 84%;
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* Cartões que agrupam as partes da página */
+.secao-alimentacao {
+    background: #ffffff;
+    padding: 32px;
+    border: 1px solid #e0e9e1;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(30, 70, 40, 0.045);
+}
+
+/* Títulos das seções */
+.titulo-secao-alimentacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.etiqueta-secao {
+    color: #43865a;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+}
+
+.titulo-secao-alimentacao h2 {
+    font-size: 24px;
+    color: #205c3a;
+    margin: 8px 0;
+}
+
+.titulo-secao-alimentacao p {
+    color: #819087;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Indicador da quantidade de planos */
+.contador-planos {
+    background: #eaf4ec;
+    color: #286642;
+    border-radius: 20px;
+    padding: 9px 15px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Ícones das seções */
+.icone-secao {
+    width: 42px;
+    height: 42px;
+    background: #eaf4ec;
+    color: #287a4b;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+}
+
+/* ==========================================
+   PLANOS ALIMENTARES
+========================================== */
+
+.lista-planos-alimentacao {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+/* Cartão individual de cada plano */
+.cartao-plano-alimentacao {
+    padding: 23px;
+    border: 1px solid #e1eae2;
+    border-radius: 15px;
+    background: #f9fbf9;
+    transition: 0.2s;
+}
+
+.cartao-plano-alimentacao:hover {
+    transform: translateY(-3px);
+    border-color: #a9cbb1;
+    box-shadow: 0 8px 20px rgba(34, 95, 54, 0.08);
+}
+
+/* Destaque do plano selecionado */
+.cartao-plano-alimentacao.plano-ativo {
+    border: 2px solid #348253;
+    background: #f2f8f3;
+}
+
+.topo-cartao-plano {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icone-cartao-plano {
+    font-size: 27px;
+}
+
+.numero-plano {
+    color: #799184;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.cartao-plano-alimentacao h3 {
+    font-size: 19px;
+    color: #285b3b;
+    margin: 17px 0;
+}
+
+/* Informações do plano */
+.informacoes-plano {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-bottom: 20px;
+}
+
+.informacoes-plano div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.informacoes-plano span {
+    font-size: 12px;
+    color: #89978d;
+}
+
+.informacoes-plano strong {
+    font-size: 16px;
+    color: #315c40;
+}
+
+/* Botão para abrir e organizar um plano */
+.botao-organizar-plano {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 9px;
+    background: #287a4b;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-organizar-plano:hover {
+    background: #205f3b;
+}
+
+/* ==========================================
+   FORMULÁRIOS DE ALIMENTAÇÃO
+========================================== */
+
+.formulario-alimentacao,
+.formulario-refeicao {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+/* Agrupamento de rótulo e campo */
+.campo-alimentacao {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.campo-alimentacao label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #385b43;
+}
+
+/* Campos de texto e seleção */
+.campo-alimentacao input,
+.campo-alimentacao select {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid #d8e4da;
+    border-radius: 9px;
+    background: #fbfdfb;
+    color: #263b30;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.campo-alimentacao input:focus,
+.campo-alimentacao select:focus {
+    border-color: #348253;
+    box-shadow: 0 0 0 3px rgba(52, 130, 83, 0.12);
+    background: white;
+}
+
+/* Botões de criação e inclusão */
+.botao-criar-plano,
+.botao-adicionar-refeicao {
+    min-height: 46px;
+    padding: 12px 20px;
+    background: #287a4b;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-criar-plano:hover,
+.botao-adicionar-refeicao:hover {
+    background: #205f3b;
+    transform: translateY(-1px);
+}
+
+.botao-criar-plano:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ==========================================
+   REFEIÇÕES
+========================================== */
+
+/* Formulário para cadastrar uma refeição */
+.formulario-refeicao {
+    padding: 22px;
+    background: #f6faf6;
+    border: 1px solid #e3ede5;
+    border-radius: 13px;
+    margin-bottom: 25px;
+}
+
+.formulario-refeicao h3 {
+    color: #315d43;
+    font-size: 17px;
+}
+
+/* Campos de tipo, horário e botão */
+.campos-refeicao {
+    display: flex;
+    align-items: end;
+    gap: 15px;
+}
+
+.campos-refeicao .campo-alimentacao {
+    flex: 1;
+}
+
+.campos-refeicao .botao-adicionar-refeicao {
+    white-space: nowrap;
+}
+
+/* Lista de refeições cadastradas */
+.lista-refeicoes-alimentacao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Cartão de cada refeição */
+.cartao-refeicao-alimentacao {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 17px 20px;
+    border: 1px solid #e3ebe4;
+    border-radius: 12px;
+    background: #ffffff;
+    transition: 0.2s;
+}
+
+/* Destaque da refeição selecionada */
+.cartao-refeicao-alimentacao.refeicao-ativa {
+    border: 2px solid #348253;
+    background: #f3f8f4;
+}
+
+.icone-refeicao {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: #eaf4ec;
+    font-size: 23px;
+}
+
+.dados-refeicao {
+    flex: 1;
+}
+
+.dados-refeicao h3 {
+    color: #315d43;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.dados-refeicao p {
+    color: #829087;
+    font-size: 13px;
+}
+
+/* Botão para selecionar uma refeição */
+.botao-selecionar-refeicao {
+    padding: 10px 14px;
+    background: #eaf4ec;
+    border: 1px solid #d5e6d8;
+    border-radius: 8px;
+    color: #286642;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-selecionar-refeicao:hover {
+    background: #dceee0;
+}
+
+/* Botão para limpar a seleção */
+.botao-limpar-selecao {
+    padding: 9px 16px;
+    border: 1px solid #d9e5dc;
+    border-radius: 8px;
+    color: #52745d;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* ==========================================
+   ALIMENTOS DA REFEIÇÃO
+========================================== */
+
+/* Formulário para adicionar alimentos */
+.formulario-adicionar-alimento {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr auto;
+    align-items: end;
+    gap: 15px;
+    padding: 22px;
+    background: #f6faf6;
+    border-radius: 13px;
+    border: 1px solid #e3ede5;
+}
+
+.formulario-adicionar-alimento .botao-adicionar-refeicao {
+    white-space: nowrap;
+}
+
+.subtitulo-lista-alimentos {
+    margin: 25px 0 15px;
+    color: #315d43;
+    font-size: 17px;
+}
+
+/* Lista dos alimentos associados à refeição */
+.lista-alimentos-refeicao {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-alimento-refeicao {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f9fbf9;
+    border: 1px solid #e5ece6;
+    border-radius: 11px;
+}
+
+.icone-item-alimento {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    background: #eaf4ec;
+    border-radius: 11px;
+    font-size: 21px;
+}
+
+.item-alimento-refeicao strong {
+    color: #315d43;
+    font-size: 14px;
+}
+
+.item-alimento-refeicao p {
+    color: #87948b;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* ==========================================
+   CATÁLOGO DE ALIMENTOS
+========================================== */
+
+.grade-catalogo-alimentos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+    gap: 15px;
+}
+
+/* Cartão de cada alimento disponível */
+.cartao-catalogo-alimento {
+    padding: 19px;
+    border: 1px solid #e3ebe4;
+    border-radius: 13px;
+    background: #f9fbf9;
+    transition: 0.2s;
+}
+
+.cartao-catalogo-alimento:hover {
+    border-color: #b4d0ba;
+    transform: translateY(-2px);
+}
+
+.topo-catalogo-alimento {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 17px;
+}
+
+.topo-catalogo-alimento span {
+    font-size: 22px;
+}
+
+.topo-catalogo-alimento strong {
+    color: #315d43;
+    font-size: 15px;
+}
+
+/* Informações nutricionais */
+.dados-nutricionais {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.dados-nutricionais div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dados-nutricionais span {
+    color: #89968d;
+    font-size: 11px;
+}
+
+.dados-nutricionais strong {
+    color: #42664d;
+    font-size: 13px;
+}
+
+/* Preço médio do alimento */
+.preco-alimento {
+    border-top: 1px solid #e4ece5;
+    margin-top: 17px;
+    padding-top: 13px;
+    color: #7b8b80;
+    font-size: 12px;
+}
+
+.preco-alimento strong {
+    color: #287a4b;
+    font-size: 14px;
+}
+
+/* ==========================================
+   ESTADOS VAZIOS E MENSAGENS
+========================================== */
+
+/* Aparece quando não existem itens cadastrados */
+.estado-vazio-alimentacao {
+    padding: 35px 15px;
+    text-align: center;
+    background: #f8fbf8;
+    border: 1px dashed #d4e3d7;
+    border-radius: 13px;
+}
+
+.estado-vazio-alimentacao span {
+    font-size: 35px;
+}
+
+.estado-vazio-alimentacao h3 {
+    color: #315d43;
+    font-size: 16px;
+    margin: 12px 0 7px;
+}
+
+.estado-vazio-alimentacao p {
+    color: #89968d;
+    font-size: 13px;
+}
+
+/* Texto exibido durante o carregamento */
+.texto-carregamento {
+    color: #66806e;
+    font-size: 14px;
+    padding: 15px 0;
+}
+
+/* Mensagens específicas da página de Alimentação */
+.mensagem-alimentacao {
+    width: 84%;
+    max-width: 1250px;
+    margin: 20px auto;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.mensagem-alimentacao.sucesso {
+    background: #e4f4e8;
+    color: #23633b;
+    border: 1px solid #c8e5ce;
+}
+
+.mensagem-alimentacao.erro {
+    background: #fff0ef;
+    color: #a83232;
+    border: 1px solid #f1d0cd;
+}
+
+/* ==========================================
+   RODAPÉ
+========================================== */
+
+.rodape-alimentacao {
+    text-align: center;
+    padding: 35px 15px 10px;
+}
+
+.rodape-alimentacao span {
+    color: #34734b;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.rodape-alimentacao p {
+    margin-top: 7px;
+    color: #91a096;
+    font-size: 12px;
+}
+
+/* ==========================================
+   RESPONSIVIDADE DA PÁGINA DE ALIMENTAÇÃO
+========================================== */
+
+@media (max-width: 850px) {
+    .destaque-alimentacao,
+    .conteudo-alimentacao {
+        width: 90%;
+    }
+
+    .cabecalho-alimentacao {
+        padding: 15px 5%;
+    }
+
+    .destaque-alimentacao {
+        padding: 30px;
+    }
+
+    .decoracao-alimentacao {
+        font-size: 65px;
+        margin-right: 0;
+    }
+
+    .formulario-adicionar-alimento {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .formulario-adicionar-alimento button {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .cabecalho-alimentacao {
+        gap: 12px;
+    }
+
+    .identidade-alimentacao {
+        font-size: 12px;
+    }
+
+    .botao-voltar-alimentacao {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+
+    .destaque-alimentacao {
+        margin: 20px auto;
+        padding: 27px 22px;
+        min-height: 190px;
+    }
+
+    .destaque-alimentacao h1 {
+        font-size: 27px;
+    }
+
+    .destaque-alimentacao p {
+        font-size: 13px;
+    }
+
+    .decoracao-alimentacao {
+        display: none;
+    }
+
+    .conteudo-alimentacao {
+        gap: 18px;
+    }
+
+    .secao-alimentacao {
+        padding: 22px 17px;
+    }
+
+    .titulo-secao-alimentacao h2 {
+        font-size: 20px;
+    }
+
+    .titulo-secao-alimentacao {
+        align-items: flex-start;
+    }
+
+    /* Formulário de refeições em coluna */
+    .campos-refeicao {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* Formulário de alimentos em coluna */
+    .formulario-adicionar-alimento {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario-adicionar-alimento button {
+        grid-column: auto;
+    }
+
+    /* Cartões de refeições */
+    .cartao-refeicao-alimentacao {
+        flex-wrap: wrap;
+    }
+
+    .botao-selecionar-refeicao {
+        width: 100%;
+    }
+
+    /* Catálogos em uma única coluna */
+    .lista-planos-alimentacao,
+    .grade-catalogo-alimentos {
+        grid-template-columns: 1fr;
+    }
+
+    .mensagem-alimentacao {
+        width: 90%;
+    }
+}
+
+.acoes-plano {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.botao-editar-plano,
+.botao-excluir-plano {
+    flex: 1;
+    padding: 11px 14px;
+    border: 1px solid #dce5df;
+    border-radius: 9px;
+    background: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.botao-editar-plano {
+    color: #26734d;
+}
+
+.botao-editar-plano:hover {
+    background: #eaf5ee;
+}
+
+.botao-excluir-plano {
+    color: #c0392b;
+}
+
+.botao-excluir-plano:hover {
+    background: #fff0ee;
+}
+
+.acoes-refeicao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.formulario-editar-refeicao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.formulario-editar-refeicao h3 {
+    margin: 0;
+}
+
+.formulario-editar-refeicao .campo-alimentacao {
+    width: 100%;
+}
+
+@media (max-width: 650px) {
+    .acoes-refeicao {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .acoes-refeicao button {
+        flex: 1;
+    }
+}

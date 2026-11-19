@@ -44,6 +44,25 @@ public class RefeicaoController {
                 .toList();
     }
 
+    @PutMapping("/{idRefeicao}")
+    public RefeicaoResponse atualizar(
+            @PathVariable Long idRefeicao,
+            @Valid @RequestBody RefeicaoRequest request) {
+
+        Refeicao refeicao = refeicaoService.atualizar(
+                idRefeicao,
+                request.tipo(),
+                request.horario()
+        );
+
+        return converterParaResponse(refeicao);
+    }
+
+    @DeleteMapping("/{idRefeicao}")
+    public void excluir(@PathVariable Long idRefeicao) {
+        refeicaoService.excluir(idRefeicao);
+    }
+
     private RefeicaoResponse converterParaResponse(Refeicao refeicao) {
 
         return new RefeicaoResponse(
