@@ -1,20 +1,92 @@
 
+import { useState } from 'react';
+import { requisicao } from '../../services/api';
+
 function PlanosAlimentares({
                                planos,
                                planoSelecionado,
-                               editandoPlano,
-                               novoOrcamento,
-                               setNovoOrcamento,
-                               novoObjetivo,
-                               setNovoObjetivo,
-                               salvandoPlano,
-                               atualizarPlano,
-                               cancelarEdicaoPlano,
-                               iniciarEdicaoPlano,
                                selecionarPlano,
-                               excluirPlano,
                                formatarMoeda,
+                               notificar,
+                               aoAtualizarPlano,
+                               aoExcluirPlano,
                            }) {
+    const [editandoPlano, setEditandoPlano] = useState(null);
+    const [novoOrcamento, setNovoOrcamento] = useState('');
+    const [novoObjetivo, setNovoObjetivo] = useState('');
+    const [salvandoPlano, setSalvandoPlano] = useState(false);
+
+    function iniciarEdicaoPlano(plano) {
+        setEditandoPlano(plano.idPlano);
+        setNovoOrcamento(String(plano.orcamento));
+        setNovoObjetivo(plano.objetivo);
+        notificar('');
+    }
+
+    function cancelarEdicaoPlano() {
+        setEditandoPlano(null);
+        setNovoOrcamento('');
+        setNovoObjetivo('');
+    }
+
+    async function atualizarPlano(event) {
+        event.preventDefault();
+
+        if (Number(novoOrcamento) <= 0) {
+            notificar('O orçamento deve ser maior que zero.', true);
+            return;
+        }
+
+        try {
+            setSalvandoPlano(true);
+            notificar('');
+
+            const resultado = await requisicao(
+                `/api/planos-alimentares/${editandoPlano}`,
+                'PUT',
+                {
+                    orcamento: Number(novoOrcamento),
+                    objetivo: novoObjetivo,
+                }
+            );
+
+            aoAtualizarPlano(resultado);
+            cancelarEdicaoPlano();
+            notificar('Plano alimentar atualizado com sucesso!');
+        } catch (error) {
+            notificar(error.message, true);
+        } finally {
+            setSalvandoPlano(false);
+        }
+    }
+
+    async function excluirPlano(idPlano) {
+        const confirmar = window.confirm(
+            'Tem certeza que deseja excluir este plano alimentar? Todas as refeições dele também serão excluídas.'
+        );
+
+        if (!confirmar) return;
+
+        try {
+            notificar('');
+
+            await requisicao(
+                `/api/planos-alimentares/${idPlano}`,
+                'DELETE'
+            );
+
+            aoExcluirPlano(idPlano);
+
+            if (editandoPlano === idPlano) {
+                cancelarEdicaoPlano();
+            }
+
+            notificar('Plano alimentar excluído com sucesso!');
+        } catch (error) {
+            notificar(error.message, true);
+        }
+    }
+
     return (
         <section className="secao-alimentacao">
             <div className="titulo-secao-alimentacao">

@@ -1,28 +1,151 @@
 
+import { useEffect, useState } from 'react';
+import { requisicao } from '../../services/api';
+
 function Refeicoes({
                        planoSelecionado,
-                       refeicoes,
-                       carregandoRefeicoes,
-                       tipoRefeicao,
-                       setTipoRefeicao,
-                       horarioRefeicao,
-                       setHorarioRefeicao,
-                       criarRefeicao,
-                       editandoRefeicao,
-                       novoTipoRefeicao,
-                       setNovoTipoRefeicao,
-                       novoHorarioRefeicao,
-                       setNovoHorarioRefeicao,
-                       salvandoRefeicao,
-                       atualizarRefeicao,
-                       cancelarEdicaoRefeicao,
-                       iniciarEdicaoRefeicao,
-                       excluirRefeicao,
                        selecionarRefeicao,
                        refeicaoSelecionada,
                        iconesRefeicoes,
                        fecharPlano,
+                       notificar,
                    }) {
+    const [refeicoes, setRefeicoes] = useState([]);
+    const [carregandoRefeicoes, setCarregandoRefeicoes] = useState(false);
+
+    const [tipoRefeicao, setTipoRefeicao] = useState('Café da manhã');
+    const [horarioRefeicao, setHorarioRefeicao] = useState('07:00');
+
+    const [editandoRefeicao, setEditandoRefeicao] = useState(null);
+    const [novoTipoRefeicao, setNovoTipoRefeicao] = useState('');
+    const [novoHorarioRefeicao, setNovoHorarioRefeicao] = useState('');
+    const [salvandoRefeicao, setSalvandoRefeicao] = useState(false);
+
+    async function carregarRefeicoes() {
+        try {
+            setCarregandoRefeicoes(true);
+
+            const resultado = await requisicao(
+                `/api/refeicoes/${planoSelecionado.idPlano}`
+            );
+
+            setRefeicoes(resultado);
+        } catch (error) {
+            notificar(error.message, true);
+        } finally {
+            setCarregandoRefeicoes(false);
+        }
+    }
+
+    useEffect(() => {
+        carregarRefeicoes();
+    }, [planoSelecionado.idPlano]);
+
+    async function criarRefeicao(event) {
+        event.preventDefault();
+
+        try {
+            notificar('');
+
+            await requisicao(
+                `/api/refeicoes/${planoSelecionado.idPlano}`,
+                'POST',
+                {
+                    tipo: tipoRefeicao,
+                    horario: horarioRefeicao,
+                }
+            );
+
+            await carregarRefeicoes();
+            notificar('Refeição criada com sucesso!');
+        } catch (error) {
+            notificar(error.message, true);
+        }
+    }
+
+    function iniciarEdicaoRefeicao(refeicao) {
+        setEditandoRefeicao(refeicao.idRefeicao);
+        setNovoTipoRefeicao(refeicao.tipo);
+        setNovoHorarioRefeicao(refeicao.horario?.slice(0, 5) || '');
+        notificar('');
+    }
+
+    function cancelarEdicaoRefeicao() {
+        setEditandoRefeicao(null);
+        setNovoTipoRefeicao('');
+        setNovoHorarioRefeicao('');
+    }
+
+    async function atualizarRefeicao(event) {
+        event.preventDefault();
+
+        try {
+            setSalvandoRefeicao(true);
+            notificar('');
+
+            const resultado = await requisicao(
+                `/api/refeicoes/${editandoRefeicao}`,
+                'PUT',
+                {
+                    tipo: novoTipoRefeicao,
+                    horario: novoHorarioRefeicao,
+                }
+            );
+
+            setRefeicoes((atuais) =>
+                atuais.map((refeicao) =>
+                    refeicao.idRefeicao === resultado.idRefeicao
+                        ? resultado
+                        : refeicao
+                )
+            );
+
+            if (refeicaoSelecionada?.idRefeicao === resultado.idRefeicao) {
+                selecionarRefeicao(resultado);
+            }
+
+            cancelarEdicaoRefeicao();
+            notificar('Refeição atualizada com sucesso!');
+        } catch (error) {
+            notificar(error.message, true);
+        } finally {
+            setSalvandoRefeicao(false);
+        }
+    }
+
+    async function excluirRefeicao(idRefeicao) {
+        const confirmar = window.confirm(
+            'Tem certeza que deseja excluir esta refeição? Os alimentos associados a ela também serão removidos.'
+        );
+
+        if (!confirmar) return;
+
+        try {
+            notificar('');
+
+            await requisicao(
+                `/api/refeicoes/${idRefeicao}`,
+                'DELETE'
+            );
+
+            setRefeicoes((atuais) =>
+                atuais.filter((refeicao) => refeicao.idRefeicao !== idRefeicao)
+            );
+
+            if (refeicaoSelecionada?.idRefeicao === idRefeicao) {
+                selecionarRefeicao(null);
+            }
+
+            if (editandoRefeicao === idRefeicao) {
+                cancelarEdicaoRefeicao();
+            }
+
+            notificar('Refeição excluída com sucesso!');
+        } catch (error) {
+            notificar(error.message, true);
+        }
+    }
+
     return (
         <section className="secao-alimentacao secao-refeicoes">
             <div className="titulo-secao-alimentacao">

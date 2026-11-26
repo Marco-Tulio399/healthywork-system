@@ -21,6 +21,7 @@ public class RefeicaoAlimentoController {
         this.service = service;
     }
 
+    // Adicionar alimento à refeição
     @PostMapping("/{idRefeicao}/alimentos")
     @ResponseStatus(HttpStatus.CREATED)
     public RefeicaoAlimentoResponse adicionar(
@@ -30,10 +31,35 @@ public class RefeicaoAlimentoController {
         return service.adicionar(idRefeicao, request);
     }
 
+    // Listar alimentos da refeição
     @GetMapping("/{idRefeicao}/alimentos")
     public List<RefeicaoAlimentoResponse> listar(
             @PathVariable Long idRefeicao) {
 
         return service.listar(idRefeicao);
+    }
+
+    // Atualizar quantidade de um alimento
+    @PutMapping("/{idRefeicao}/alimentos/{idAlimento}")
+    public RefeicaoAlimentoResponse atualizar(
+            @PathVariable Long idRefeicao,
+            @PathVariable Long idAlimento,
+            @Valid @RequestBody RefeicaoAlimentoRequest request) {
+
+        return service.atualizar(
+                idRefeicao,
+                idAlimento,
+                request.quantidade()
+        );
+    }
+
+    // Remover alimento da refeição
+    @DeleteMapping("/{idRefeicao}/alimentos/{idAlimento}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluir(
+            @PathVariable Long idRefeicao,
+            @PathVariable Long idAlimento) {
+
+        service.excluir(idRefeicao, idAlimento);
     }
 }
